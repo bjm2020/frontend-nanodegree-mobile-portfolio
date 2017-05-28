@@ -440,7 +440,7 @@ var resizePizzas = function(size) {
           console.log("bug in sizeSwitcher");
       }
 
-    var randomPizza = document.querySelectorAll(".randomPizzaContainer");
+    var randomPizza = document.getElementByClassName("randomPizzaContainer");
     for (var i = 0; i < randomPizza.length; i++) {
       randomPizza[i].style.width = newWidth + "%";
  }
@@ -460,8 +460,9 @@ window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 //Changed to 24 to optimize page speed
+
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 24; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -502,7 +503,7 @@ function updatePositions() {
 
   var scrollPosition = document.body.scrollTop / 1250;
   var length = items.length;
-      for (var i = 0; i < length; i++) {
+  for (var i = 0; i < length; i++) {
     var phase = Math.sin((scrollPosition) + (i % 5));
     items[i].style.transform = 'translateX(' + (100 * phase) + 'px)';
   }
@@ -528,7 +529,10 @@ window.addEventListener('scroll', function() {
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  //number of rows calculated based on screen height
+  var rows = window.screen.height/s;
+  //Calculate Optimal amount of pizzas for screen size
+  for (var i = 0; i < rows*cols; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
