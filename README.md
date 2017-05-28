@@ -13,7 +13,8 @@ and hosted on your own server.
 I reccommend python's simple http server.  
 
 '''$> cd /path/to/your-project-folder
-$> python -m SimpleHTTPServer 8080'''
+$> python -m SimpleHTTPServer 8080
+'''
 
 Open a browser and visit localhost:8080
 
