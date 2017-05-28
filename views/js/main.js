@@ -438,13 +438,7 @@ var resizePizzas = function(size) {
     var randomPizza = document.querySelectorAll(".randomPizzaContainer");
     for (var i = 0; i < randomPizza.length; i++) {
       randomPizza[i].style.width = newWidth + "%";
-//      console.log(randomPizza[i].style.width);
-//    var newSize = sizeSwitcher(size);
-//    var dx = (newSize - oldSize) * windowWidth;
-
-  //  return dx;
  }
-//console.log("Size Changed");
 
 }
 changePizzaSizes(size);
@@ -459,6 +453,7 @@ changePizzaSizes(size);
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+//Changed to 24 to optimize page speed
 for (var i = 2; i < 24; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -488,6 +483,10 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+
+//Modified:  Moved the Math.sin function out of the for loop, removing the need to calculate multiple times.
+// Also added will-change: transform; to .mover css element to offload layout functions to the gpu.
+// Added
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -510,11 +509,13 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
+//Modified:  added requestAnimationFrame to help speed up pizza animations
 window.addEventListener('scroll', function() {
   window.requestAnimationFrame(updatePositions);
 });
 
 // Generates the sliding pizzas when the page loads.
+// added requestAnimationFrame to help speed up pizza animations.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
