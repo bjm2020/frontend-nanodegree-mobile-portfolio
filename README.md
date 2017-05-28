@@ -12,7 +12,7 @@ and hosted on your own server.
 
 I reccommend python's simple http server.  
 
-'''
+'''bash
 $> cd /path/to/your-project-folder
 $> python -m SimpleHTTPServer 8080
 
