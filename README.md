@@ -7,7 +7,7 @@ how to access the page and details of the optimizations performed.
 ### Getting started
 
 The site is hosted on the github pages platform.  The pages can be accessed at 
-(https://bjm2020.github.io/frontend-nanodegree-mobile-portfolio/) or downloaded from github
+https://bjm2020.github.io/frontend-nanodegree-mobile-portfolio/ or downloaded from github
 and hosted on your own server.
 
 #### Part 1: Optimize PageSpeed Insights score for index.html
