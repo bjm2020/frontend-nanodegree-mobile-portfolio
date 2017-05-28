@@ -18,6 +18,7 @@ cameron *at* udacity *dot* com
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
+var items;
 var pizzaIngredients = {};
 pizzaIngredients.meats = [
   "Pepperoni",
@@ -424,13 +425,17 @@ var resizePizzas = function(size) {
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function changePizzaSizes (size) {
     // Changes the slider value to a percent width
+    var newWidth;
       switch(size) {
         case "1":
           newWidth = 25;
+          break;
         case "2":
           newWidth = 33.3;
+          break;
         case "3":
           newWidth = 50;
+          break;
         default:
           console.log("bug in sizeSwitcher");
       }
@@ -442,6 +447,7 @@ var resizePizzas = function(size) {
 
 }
 changePizzaSizes(size);
+
   // Iterates through pizza elements on the page and changes their widths
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -484,18 +490,21 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 
-//Modified:  Moved the Math.sin function out of the for loop, removing the need to calculate multiple times.
+//Modified:  Moved the document.body.scrollTop/1250 out of the for loop, removing the need to calculate multiple times.
 // Also added will-change: transform; to .mover css element to offload layout functions to the gpu.
-// Added
+// changed items[i].left to transform.
+
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  var sin = Math.sin(document.body.scrollTop/1250);
-      for (var i = 0; i < items.length; i++) {
-    var phase = sin + (i % 5);
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+
+  var scrollPosition = document.body.scrollTop / 1250;
+  var length = items.length;
+      for (var i = 0; i < length; i++) {
+    var phase = Math.sin((scrollPosition) + (i % 5));
+    items[i].style.transform = 'translateX(' + (100 * phase) + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -525,9 +534,11 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    elem.style.left = (i % cols) * s + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
+
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
+  items = document.querySelectorAll('.mover');
   window.requestAnimationFrame(updatePositions);
 });
