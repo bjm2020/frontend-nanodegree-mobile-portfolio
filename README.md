@@ -15,7 +15,7 @@ I reccommend python's simple http server.
 ```bash
   $> cd /path/to/your-project-folder
   $> python -m SimpleHTTPServer 8080
-  ```
+  ``` 
 
 Open a browser and visit localhost:8080
 

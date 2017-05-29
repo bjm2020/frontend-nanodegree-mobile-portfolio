@@ -366,7 +366,7 @@ var pizzaElementGenerator = function(i) {
       pizzaImage,                 // the pizza image itself
       pizzaDescriptionContainer,  // contains the pizza title and list of ingredients
       pizzaName,                  // the pizza name itself
-      ul;                         // the list of ingredients
+      ul;// the list of ingredients
 
   pizzaContainer = document.createElement("div");
   pizzaImageContainer = document.createElement("div");
@@ -462,7 +462,7 @@ window.performance.mark("mark_start_generating"); // collect timing data
 //Changed to 24 to optimize page speed
 
 var pizzasDiv = document.getElementById("randomPizzas");
-for (var i = 2; i < 24; i++) {
+for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
